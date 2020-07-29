@@ -13,4 +13,5 @@ yarn-error.log
 
 # Dev
 /.laradock
+/.vscode
 /docker
