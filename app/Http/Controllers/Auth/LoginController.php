@@ -54,7 +54,7 @@ class LoginController extends Controller
         $cart = collect($request->session()->get('cart'));
 
         /* Call original logout method */
-        $response = $this->originalLogout();
+        $response = $this->originalLogout($request);
 
         /* Repopulate Session with Cart */
         if (!config('cart.destroy_on_logout')) {
