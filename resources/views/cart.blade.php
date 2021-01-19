@@ -14,17 +14,39 @@
                             <tr>
                                 <th scope="col">Name</th>
                                 <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Tax Rate</th>
                                 <th scope="col">Total</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @php $grandTotal = 0 @endphp
                             @foreach (Cart::content() as $item)
                             <tr>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->price }}</td>
+                                <td>{{ $item->qty }}</td>
+                                <td>{{ $item->taxRate }}</td>
                                 <td>{{ $item->total }}</td>
+                                <td><a href="{{ route('remove',  ['rowId' => $item->rowId]) }}">Delete</a></td>
                             </tr>
                             @endforeach
+                            <tr style="text-align:center">
+                                <td colspan="5"><b style="color:red">Total Tax </b> {{Cart::tax()}} </td>
+                            </tr>
+                            <tr style="text-align:center">
+                                <td colspan="5"><b style="color:red">Total Discount </b> {{Cart::discount()}} </td>
+                            </tr>
+                            <tr style="text-align:center">
+                                <td colspan="5"><b style="color:red">Total: </b> {{Cart::subtotal()}} (without tax) </td>
+                            </tr>
+                            <tr style="text-align:center">
+                                <td colspan="5"><b style="color:red">Grand Total: </b> {{ Cart::total() }} (with tax and discount)</td>
+                            </tr>
+                            <tr style="text-align:center">
+                                <td colspan="5"><a class="btn btn-danger" href="{{ route('empty')}}">Empty Cart</a></td>
+                            </tr>
                         </tbody>
                     </table>
                     @else
